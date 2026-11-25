@@ -42,3 +42,8 @@
 - curl -ik -X PUT -H "Content-Type: application/json" -d "{\"lastName\":\"Smith\",\"numBags\":2}" https://localhost:8081/api/v1/tickets/PNR123/checkin
 
 - -M-Danypoint.platform.client_id=b406b5f66b144c288145178cdf0c7814 -M-Danypoint.platform.client_secret=3E1240DDEEDB48D59ebeAc4D7CA5E4FC
+- cd $PROJECT_HOME 
+- mkdir parent-pom
+- cp $STUDENT_FILE/solutions/walkthroughs/devprd/lesson02/wt2-2_solution/parent-pom/pom.xml parent-pom/pom.xml
+- mkdir bom
+- cp $STUDENT_FILE/solutions/walkthroughs/devprd/lesson02/wt2-2_solution/bom/pom.xml bom/pom.xml
