@@ -13,10 +13,10 @@
 - Client Secret: 3E1240DDEEDB48D59ebeAc4D7CA5E4FC
 
 ### Connected App 
-- Exchange Contributor ID: 
-- Exchange Contributor Secret: 
-- CloudHub Deployment ID: 
-- CloudHub Deployment Secret: 
+- Exchange Contributor ID: 18ae4377357f4039b2530c7a99dd3b71
+- Exchange Contributor Secret: 56288Ff78f2C4d0c95c4F505abC016C2
+- CloudHub Deployment ID: 598e25a21bae4f9b90d913dca4b131d6
+- CloudHub Deployment Secret: 4A993ba8Ab2f41a1A0d5072B292B24e4
 
 ### API Instance ID:
 - prod: 21319336
@@ -47,3 +47,10 @@
 - cp $STUDENT_FILE/solutions/walkthroughs/devprd/lesson02/wt2-2_solution/parent-pom/pom.xml parent-pom/pom.xml
 - mkdir bom
 - cp $STUDENT_FILE/solutions/walkthroughs/devprd/lesson02/wt2-2_solution/bom/pom.xml bom/pom.xml
+- cp $STUDENT_FILE/solutions/etc/settings.xml.template ~/.m2/settings.xml
+- cd $PROJECT_HOME/check-in-papi
+- mvn clean verify
+- cd $PROJECT_HOME/check-in-papi
+- mvn clean deploy
+- mvn clean deploy -DmuleDeploy -Dap.client_id=b406b5f66b144c288145178cdf0c7814 -Dap.client_secret=3E1240DDEEDB48D59ebeAc4D7CA5E4FC -Dap.ca.client_id=598e25a21bae4f9b90d913dca4b131d6 -Dap.ca.client_secret=4A993ba8Ab2f41a1A0d5072B292B24e4
+- curl -ik -X PUT -H "Content-Type: application/json" -d "{\"lastName\":\"Smith\",\"numBags\":2}" https://check-in-papi-kzvhtj.5sc6y6-2.usa-e2.cloudhub.io/api/v1/tickets/PNR123/checkin
