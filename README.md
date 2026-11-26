@@ -65,3 +65,11 @@
 - curl -ik -X PUT -H "Content-Type: application/json" -d "{\"lastName\":\"Smith\",\"numBags\":2}" https://localhost:8081/api/v1/tickets/PNR123/checkin
 - curl -ik https://localhost:8081/alive
 - curl -ik https://localhost:8081/ready
+- cd $PROJECT_HOME
+- cp check-in-papi/src/main/mule/health.xml apps-commons/src/main/mule/health-common.xml
+- cp check-in-papi/src/main/mule/error.xml apps-commons/src/main/mule/error-common.xml
+- cd $PROJECT_HOME/apps-commons
+- mvn clean install
+- cd $PROJECT_HOME
+- mvn install:install-file -Dfile=bom/pom.xml -DpomFile=bom/pom.xml
+- mvn install:install-file -Dfile=parent-pom/pom.xml -DpomFile=parent-pom/pom.xml
