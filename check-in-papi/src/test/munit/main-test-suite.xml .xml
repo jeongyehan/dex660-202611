@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="main-test-suite.xml .xml" />
+	<munit:test name="main-test-suite.xml -payment-approval-by-pnrTest" doc:id="017b8454-b16d-4865-9484-e762f672714b" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to payment-approval-by-pnr" doc:id="f9e529bf-3a74-43e9-a4f1-eeb3152b0398" name="payment-approval-by-pnr"/>
+		</munit:execution>
+	</munit:test>
+	<munit:test name="main-test-suite.xml -check-in-by-pnrTest" doc:id="ed1b0de6-02d5-4e51-af93-eac4a731aba7" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to check-in-by-pnr" doc:id="55c31b4b-6092-42a6-b744-4c888bfc288e" name="check-in-by-pnr"/>
+		</munit:execution>
+	</munit:test>
+
+</mule>
