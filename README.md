@@ -5,7 +5,7 @@
 - STUDENT_FILE=/Users/yehan.jeong/Desktop/DEX660-WI27-EN-Student-Files
 
 ## Anypoint Platform Information
-- Mule Account: yehan202611
+- Mule Account: yehan202611 / Password202611
 
 ### Business Group
 - Business Group ID: 8c632c6e-c721-49a3-926b-9aefb5d3dce3

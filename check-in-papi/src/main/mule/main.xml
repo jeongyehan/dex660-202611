@@ -34,12 +34,15 @@ output application/json
         </ee:transform>
 	</flow>
 	<flow name="check-in-by-pnr" doc:id="a7d6fd49-fbce-4ee9-a144-5adefebdc4ff" >
-		<ee:transform doc:name="Transform Message">
+		<flow-ref name="check-in-flights-management" doc:id="bfa15334-dad8-4bd0-b289-ea71a5808f97"/>
+		<flow-ref name="register-passenger-data" doc:id="8f200893-131e-4e0d-b510-a8e2c5dbb889"/>
+		<flow-ref name="create-payment-for-bags" doc:id="b05f0d83-b62c-4742-a8be-e56dcf0051f6"/>
+		<ee:transform doc:name="Transform Message" doc:id="27bd9078-3aaa-45e2-a5f5-8c19d8e2ccb3">
             <ee:variables>
-                <ee:set-variable variableName="PNR">attributes.uriParams.'PNR'</ee:set-variable>
+                <ee:set-variable variableName="PNR"><![CDATA[attributes.uriParams.'PNR']]></ee:set-variable>
             </ee:variables>
         </ee:transform>
-		<ee:transform doc:name="Transform Message">
+		<ee:transform doc:name="Transform Message" doc:id="d2852d21-94bb-42a5-9033-d30e5ef66d83">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
@@ -52,4 +55,13 @@ output application/json
 		<tracing:set-logging-variable doc:name="Set logging variable" doc:id="d29bbb0e-541e-420c-8b87-4b57505adc7b" variableName="PNR" value="#[vars.PNR default '']" />
 		<logger level="INFO" doc:name="Logger" doc:id="11274f68-eceb-46fc-98d4-23572f7a1934" message="#[vars.PNR default '']"/>
 	</flow>
+	<flow name="check-in-flights-management">
+	    <logger />
+	</flow>
+	<flow name="register-passenger-data">
+	    <logger />
+	</flow>
+	<flow name="create-payment-for-bags">
+	    <logger />
+	</flow>	
 </mule>

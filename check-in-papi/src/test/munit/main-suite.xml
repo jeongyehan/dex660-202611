@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="main-suite.xml" />
+	<munit:test name="check-in-by-pnr-test" doc:id="25f7b35b-8269-4fef-ad1c-8b6de6538556" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Flow Reference" doc:id="66f485b6-b3f5-496a-b6b2-35e820228295" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bfa15334-dad8-4bd0-b289-ea71a5808f97" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://checkinbypnrtest/mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit-tools:spy doc:name="Spy Flow Reference" doc:id="36abdafc-cb37-4b98-91fb-e3f9667b8a9f" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8f200893-131e-4e0d-b510-a8e2c5dbb889" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="4c42ba52-d74e-4bc4-91cc-684813990872" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import checkinbypnrtest::spy_assert_payload
+---
+spy_assert_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert doc:name="Assert payload" doc:id="23302f04-138c-4ae0-967a-9b5c8e0fe6bd" message="The payload does not match">
+						<munit-tools:that ><![CDATA[#[%dw 2.0
+import checkinbypnrtest::spy_assert_payload1
+---
+spy_assert_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+					</munit-tools:assert>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+			<munit:set-event doc:name="Set Input" doc:id="28420c9d-279e-4bb9-88d6-43d0dfa63495" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://checkinbypnrtest/set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://checkinbypnrtest/set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://checkinbypnrtest/set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to check-in-by-pnr" doc:id="dd5e7922-e328-4301-8bf4-38877446d0b3" name="check-in-by-pnr"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="3b58be0b-a571-493a-b43c-684a89cf0cba" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import checkinbypnrtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="026565b8-108d-40f5-af7a-8d537ab78876" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="27bd9078-3aaa-45e2-a5f5-8c19d8e2ccb3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Flow Reference" doc:id="4609a9ca-8e4c-47eb-a04d-c97b9705511e" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b05f0d83-b62c-4742-a8be-e56dcf0051f6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Set logging variable" doc:id="9f2d7399-402c-4a37-a318-6c34f86865ea" processor="tracing:set-logging-variable" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d29bbb0e-541e-420c-8b87-4b57505adc7b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Transform Message" doc:id="fe47ced3-db4b-45c5-8a62-0ec2b35fd7e2" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="d2852d21-94bb-42a5-9033-d30e5ef66d83" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Logger" doc:id="6ee78f94-fa8f-4b69-b3ac-e6cef3393944" processor="logger" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="11274f68-eceb-46fc-98d4-23572f7a1934" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+			<munit-tools:verify-call doc:name="Verify Flow Reference" doc:id="e007299c-02ad-43ab-acf5-40c7bd15a8b0" processor="flow-ref" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8f200893-131e-4e0d-b510-a8e2c5dbb889" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+			</munit-tools:verify-call>
+		</munit:validation>
+	</munit:test>
+
+</mule>
