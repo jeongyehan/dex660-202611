@@ -57,4 +57,7 @@
 - -M-Denv=test
     -M-Denv=prod
 - cd $PROJECT_HOME/check-in-papi
-mvn clean deploy -Dencrypt.key=secure12345
+- mvn clean deploy -Dencrypt.key=secure12345
+- mvn clean deploy -DmuleDeploy -Dap.client_id=b406b5f66b144c288145178cdf0c7814 -Dap.client_secret=3E1240DDEEDB48D59ebeAc4D7CA5E4FC -Dap.ca.client_id=598e25a21bae4f9b90d913dca4b131d6 -Dap.ca.client_secret=4A993ba8Ab2f41a1A0d5072B292B24e4 -Dencrypt.key=secure12345 -Ddeployment.env=dev
+- mvn clean deploy -DmuleDeploy -Dap.client_id=b406b5f66b144c288145178cdf0c7814 -Dap.client_secret=3E1240DDEEDB48D59ebeAc4D7CA5E4FC -Dap.ca.client_id=598e25a21bae4f9b90d913dca4b131d6 -Dap.ca.client_secret=4A993ba8Ab2f41a1A0d5072B292B24e4 -Dencrypt.key=secure12345 -Ddeployment.env=test
+- mvn clean deploy -DmuleDeploy -Dap.client_id=b406b5f66b144c288145178cdf0c7814 -Dap.client_secret=3E1240DDEEDB48D59ebeAc4D7CA5E4FC -Dap.ca.client_id=598e25a21bae4f9b90d913dca4b131d6 -Dap.ca.client_secret=4A993ba8Ab2f41a1A0d5072B292B24e4 -Dencrypt.key=secure12345 -Ddeployment.env=prod -Ddeployment.suffix=
